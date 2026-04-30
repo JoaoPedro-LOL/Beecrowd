@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class b1187 {
+public class b1184 {
 
     public final static Scanner TECLADO = new Scanner(System.in);
 
@@ -8,22 +8,30 @@ public class b1187 {
         return TECLADO.nextDouble();
     }
 
+    public static char lerChar() {
+        return TECLADO.next().toUpperCase().charAt(0);
+    }
+
     public static void exibirResultado(double valor) {
         System.out.printf("%.1f%n", valor);
     }
 
-    public static void main(String[] args) {
-        char operacao = TECLADO.next().toUpperCase().charAt(0);
-        double[][] M = new double[12][12];
+    public static void executarDesafio() {
+        char operacao = lerChar();
+        double[][] m = new double[12][12];
         double soma = 0;
         int contagem = 0;
 
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
-                M[i][j] = lerValor();
-    
-                if (j > i && j < 11 - i) {
-                    soma += M[i][j];
+                m[i][j] = lerValor();
+            }
+        }
+
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if (j > i) { 
+                    soma += m[i][j];
                     contagem++;
                 }
             }
@@ -34,5 +42,9 @@ public class b1187 {
         } else {
             exibirResultado(soma);
         }
+    }
+
+    public static void main(String[] args) {
+        executarDesafio();
     }
 }

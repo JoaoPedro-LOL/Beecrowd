@@ -1,64 +1,48 @@
-
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class b1259 {
 
     public final static Scanner TECLADO = new Scanner(System.in);
 
-    public static void exibirResultado(int[] vetor, int quantidade) {
-        for (int i = 0; i < quantidade; i++) {
-            System.out.println(vetor[i]);
-        }
+    public static int lerNumeroInteiro() {
+        return TECLADO.nextInt();
     }
 
-    public static void executarDesafio() {
-        int n = TECLADO.nextInt();
+    public static void executa() {
+
+        int n = lerNumeroInteiro();
         int[] pares = new int[n];
         int[] impares = new int[n];
-        int contP = 0;
-        int contI = 0;
+        int op = 0;
+        int oi = 0;
 
         for (int i = 0; i < n; i++) {
-            int valor = TECLADO.nextInt();
+            int valor = lerNumeroInteiro();
             if (valor % 2 == 0) {
-                pares[contP++] = valor;
+                pares[op++] = valor;
             } else {
-                impares[contI++] = valor;
+                impares[oi++] = valor;
             }
         }
 
-        ordenarCrescente(pares, contP);
-        ordenarDecrescente(impares, contI);
+        // Ordena apenas a parte preenchida de cada array
+        Arrays.sort(pares, 0, op);
+        Arrays.sort(impares, 0, oi);
 
-        exibirResultado(pares, contP);
-        exibirResultado(impares, contI);
-    }
-
-    public static void ordenarCrescente(int[] vetor, int tam) {
-        for (int i = 0; i < tam - 1; i++) {
-            for (int j = 0; j < tam - 1 - i; j++) {
-                if (vetor[j] > vetor[j + 1]) {
-                    int aux = vetor[j];
-                    vetor[j] = vetor[j + 1];
-                    vetor[j + 1] = aux;
-                }
-            }
+        // Imprime pares em ordem crescente
+        for (int i = 0; i < op; i++) {
+            System.out.println(pares[i]);
         }
-    }
 
-    public static void ordenarDecrescente(int[] vetor, int tam) {
-        for (int i = 0; i < tam - 1; i++) {
-            for (int j = 0; j < tam - 1 - i; j++) {
-                if (vetor[j] < vetor[j + 1]) {
-                    int aux = vetor[j];
-                    vetor[j] = vetor[j + 1];
-                    vetor[j + 1] = aux;
-                }
-            }
+        // (percorrendo o array de trás para frente)
+        for (int i = oi - 1; i >= 0; i--) {
+            System.out.println(impares[i]);
         }
+
     }
 
     public static void main(String[] args) {
-        executarDesafio();
+        executa();
     }
 }
